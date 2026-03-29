@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <title>Convite – Catarina 8 Anos 🚀</title>
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      min-height: 100%;
+      background: #a8d8ea;
+      font-family: 'Trebuchet MS', Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    .page {
+      min-height: 100svh;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: max(12px, env(safe-area-inset-top))
+               max(12px, env(safe-area-inset-right))
+               max(24px, env(safe-area-inset-bottom))
+               max(12px, env(safe-area-inset-left));
+      background: #a8d8ea;
+    }
+
+    .convite {
+      position: relative;
+      width: 100%;
+      max-width: min(480px, 92vw);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.28), 0 2px 8px rgba(0,0,0,0.14);
+      background: #c9e8f5;
+    }
+
+    .fundo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      z-index: 0;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .conteudo {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 8% 8%;
+      min-height: 100%;
+    }
+
+    .logo {
+      width: 60%;
+      max-width: 260px;
+      height: auto;
+      display: block;
+      margin: 18% auto 5%;
+      filter: drop-shadow(0 3px 8px rgba(0,0,0,0.35));
+      user-select: none;
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    .balao {
+      width: 82%;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      border-radius: 20px;
+      padding: 4% 6%;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+    }
+
+    .oi-convidado {
+      font-size: clamp(15px, 4vw, 22px);
+      font-weight: 700;
+      color: #1a237e;
+      margin: 0 0 5px;
+      letter-spacing: -0.2px;
+      text-shadow: 1px 1px 0 rgba(255,255,255,0.6);
+    }
+
+    .chamada {
+      font-size: clamp(13px, 3.4vw, 19px);
+      font-weight: 600;
+      color: #2c3e50;
+      line-height: 1.45;
+      margin: 0 0 6%;
+    }
+
+    .divider {
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #f4c430, transparent);
+      margin: 0 auto 5%;
+      border: none;
+    }
+
+    .info-festa {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 6%;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-size: clamp(11px, 2.9vw, 16px);
+      color: #4a2800;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .info-item .label {
+      color: #b5451b;
+      font-weight: 800;
+    }
+
+    .frase-final {
+      font-size: clamp(15px, 4vw, 26px);
+      font-style: italic;
+      font-weight: 700;
+      color: #1565c0;
+      margin: 0;
+      text-shadow: 0 1px 4px rgba(255,255,255,0.7);
+    }
+
+    /* ── Botão de som ── */
+    #btn-som {
+      position: fixed;
+      top: max(14px, env(safe-area-inset-top));
+      right: max(14px, env(safe-area-inset-right));
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 10px 16px;
+      background: rgba(21, 101, 192, 0.90);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-size: clamp(11px, 3vw, 14px);
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.25);
+      transition: background 0.2s, transform 0.1s;
+      -webkit-appearance: none;
+      appearance: none;
+      touch-action: manipulation;
+    }
+    #btn-som:active {
+      transform: scale(0.96);
+      background: rgba(13, 71, 161, 0.95);
+    }
+
+    /* ── Estrelinhas ── */
+    @keyframes pisca {
+      0%, 100% { opacity: 0.2; transform: scale(0.8); }
+      50%       { opacity: 1;   transform: scale(1.2); }
+    }
+    .estrela {
+      position: absolute;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #fff;
+      animation: pisca 2s ease-in-out infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+    .estrela:nth-child(1) { top:  8%; left: 18%; animation-delay: 0.0s; }
+    .estrela:nth-child(2) { top:  5%; left: 55%; animation-delay: 0.4s; }
+    .estrela:nth-child(3) { top: 14%; left: 78%; animation-delay: 0.8s; }
+    .estrela:nth-child(4) { top: 23%; left: 10%; animation-delay: 1.2s; }
+    .estrela:nth-child(5) { top: 20%; left: 88%; animation-delay: 0.2s; }
+    .estrela:nth-child(6) { top:  3%; left: 35%; animation-delay: 1.6s; }
+    .estrela:nth-child(7) { top: 11%; left: 92%; animation-delay: 0.6s; }
+  </style>
+</head>
+<body>
+
+  <button id="btn-som" aria-label="Ativar som">
+    <span id="som-icone">🔊</span>
+    <span id="som-texto">Ativar Som</span>
+  </button>
+
+  <div class="page">
+    <div class="convite">
+
+      <!-- Caminhos RELATIVOS — funcionam perfeitamente no GitHub Pages -->
+      <img class="fundo" src="fundo.jpeg" alt="" aria-hidden="true" draggable="false">
+
+      <span class="estrela"></span>
+      <span class="estrela"></span>
+      <span class="estrela"></span>
+      <span class="estrela"></span>
+      <span class="estrela"></span>
+      <span class="estrela"></span>
+      <span class="estrela"></span>
+
+      <div class="conteudo">
+
+        <img class="logo" src="logo_catarina_8_anos.png" alt="Catarina 8 Anos" draggable="false">
+
+        <div class="balao">
+          <p class="oi-convidado">Oi Emanuelly! 🎉</p>
+          <p class="chamada">
+            Você está convidada para a minha<br>festa de aniversário!
+          </p>
+
+          <hr class="divider">
+
+          <div class="info-festa">
+            <div class="info-item">🗓️&nbsp;<span><span class="label">Data:</span> 30/05/2026</span></div>
+            <div class="info-item">🕒&nbsp;<span><span class="label">Horário:</span> 15:00</span></div>
+            <div class="info-item">📍&nbsp;<span><span class="label">Local:</span> Salão de Festas</span></div>
+            <div class="info-item">🏢&nbsp;<span>Cond. Reserva Urano</span></div>
+          </div>
+
+          <p class="frase-final">Ao infinito e além… 🚀</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!--
+    iOS AUDIO FIX:
+    - preload="none": iOS não tenta baixar antes do gesto
+    - play() chamado DIRETAMENTE no click, sem load() antes
+    - Caminhos relativos: sem CORS, sem bloqueio
+  -->
+  <audio id="audio" loop playsinline webkit-playsinline preload="none">
+    <source src="toy-story-track.m4a" type="audio/mp4">
+    <source src="toy-story.mp3"       type="audio/mpeg">
+  </audio>
+
+  <script>
+  (function () {
+    'use strict';
+
+    var btn    = document.getElementById('btn-som');
+    var audio  = document.getElementById('audio');
+    var icone  = document.getElementById('som-icone');
+    var texto  = document.getElementById('som-texto');
+
+    var tocando    = false;
+    var fadeTimer  = null;
+    var VOL_ALVO   = 0.8;
+
+    function cancelarFade() {
+      if (fadeTimer) { clearInterval(fadeTimer); fadeTimer = null; }
+    }
+
+    function fadeIn() {
+      cancelarFade();
+      audio.volume = 0.05;
+      fadeTimer = setInterval(function () {
+        if (audio.volume < VOL_ALVO - 0.04) {
+          audio.volume = Math.min(audio.volume + 0.04, VOL_ALVO);
+        } else {
+          audio.volume = VOL_ALVO;
+          cancelarFade();
+        }
+      }, 120);
+    }
+
+    function fadeOut(cb) {
+      cancelarFade();
+      fadeTimer = setInterval(function () {
+        if (audio.volume > 0.05) {
+          audio.volume = Math.max(audio.volume - 0.05, 0);
+        } else {
+          audio.volume = 0;
+          audio.pause();
+          cancelarFade();
+          if (cb) cb();
+        }
+      }, 120);
+    }
+
+    function setBotao(ativo) {
+      tocando = ativo;
+      icone.textContent = ativo ? '🔉' : '🔊';
+      texto.textContent = ativo ? 'Pausar Som' : 'Ativar Som';
+    }
+
+    btn.addEventListener('click', function () {
+      if (tocando) {
+        fadeOut(function () { setBotao(false); });
+        return;
+      }
+
+      audio.muted  = false;
+      audio.volume = 0.05;
+
+      // play() direto no click — iOS mantém o contexto do gesto
+      var p = audio.play();
+      if (p !== undefined) {
+        p.then(function ()    { setBotao(true); fadeIn(); })
+         .catch(function (e)  { console.warn('Áudio:', e); setBotao(false); });
+      } else {
+        setBotao(true); fadeIn();
+      }
+    });
+
+  })();
+  </script>
+
+</body>
+</html>
