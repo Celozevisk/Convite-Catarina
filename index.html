@@ -70,9 +70,10 @@
       min-height: 100%;
     }
 
+    /* ── Logo / título ── */
     .logo {
-      width: 60%;
-      max-width: 260px;
+      width: 67%;
+      max-width: 281px;
       height: auto;
       display: block;
       margin: 18% auto 5%;
@@ -82,19 +83,20 @@
       -webkit-user-drag: none;
     }
 
+    /* ── Balão central ── */
     .balao {
-      width: 82%;
-      background: rgba(255,255,255,0.82);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      width: 55%;
+      background: rgba(255,255,255,0.10);
+      /*backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);*/
       border-radius: 20px;
-      padding: 4% 6%;
+      /*Aumemta ou diminui o convite mas exibe os personagens completamente: padding: 4% 6%;*/
       text-align: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+      /*box-shadow: 0 4px 20px rgba(0,0,0,0.12);*/
     }
 
     .oi-convidado {
-      font-size: clamp(15px, 4vw, 22px);
+      font-size: clamp(27px, 4vw, 22px);
       font-weight: 700;
       color: #1a237e;
       margin: 0 0 5px;
@@ -103,37 +105,44 @@
     }
 
     .chamada {
-      font-size: clamp(13px, 3.4vw, 19px);
+      font-size: clamp(14px, 3.8vw, 22px);
       font-weight: 600;
       color: #2c3e50;
       line-height: 1.45;
-      margin: 0 0 6%;
+      margin: 0 0 7%;
     }
 
+    /* ── Divider ── */
     .divider {
       width: 60%;
       height: 2px;
       background: linear-gradient(90deg, transparent, #f4c430, transparent);
-      margin: 0 auto 5%;
+      margin: 0 auto 6%;
       border: none;
     }
 
+    /* ── Info festa ── */
     .info-festa {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      margin-bottom: 6%;
+      /*gap: 8px;*/
+      margin-bottom: 7%;
     }
 
     .info-item {
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 7px;
-      font-size: clamp(11px, 2.9vw, 16px);
+      /*justify-content: center;
+      gap: 8px;*/
+      font-size: clamp(12px, 3.2vw, 18px);
       color: #4a2800;
       font-weight: 600;
       line-height: 1.4;
+    }
+
+    .info-item .emoji {
+      font-size: 1.15em;
+      flex-shrink: 0;
     }
 
     .info-item .label {
@@ -141,13 +150,15 @@
       font-weight: 800;
     }
 
+    /* ── Frase final ── */
     .frase-final {
-      font-size: clamp(15px, 4vw, 26px);
+      font-size: clamp(16px, 4.5vw, 28px);
       font-style: italic;
       font-weight: 700;
       color: #1565c0;
       margin: 0;
       text-shadow: 0 1px 4px rgba(255,255,255,0.7);
+      letter-spacing: 0.2px;
     }
 
     /* ── Botão de som ── */
