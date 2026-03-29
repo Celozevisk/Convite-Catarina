@@ -238,9 +238,9 @@
         <img class="logo" src="logo_catarina_8_anos.png" alt="Catarina 8 Anos" draggable="false">
 
         <div class="balao">
-          <p class="oi-convidado">Oi Emanuelly!</p>
-          <p class="chamada">
-            Você está convidada para a minha<br>festa de aniversário!
+          <p class="oi-convidado" id="txt-oi">Oi Amiguinha(o)!</p>
+          <p class="chamada" id="txt-chamada">
+            Você está convidada(o) para a minha<br>festa de aniversário!
           </p>
 
           <hr class="divider">
@@ -274,6 +274,62 @@
   (function () {
     'use strict';
 
+    /* ================================================================
+       LISTA DE CONVIDADOS
+       ─────────────────────────────────────────────────────────────────
+       Para cada convidado novo, adicione uma linha seguindo o padrão:
+         { id: '<Nome>', nome: '<Nome>', genero: 'f' }   ← menina
+         { id: '<Nome>', nome: '<Nome>', genero: 'm' }   ← menino
+
+       Links gerados automaticamente:
+         ?c=1  →  https://celozevisk.github.io/Convite-Catarina/?c=1
+         ?c=2  →  https://celozevisk.github.io/Convite-Catarina/?c=2
+         (e assim por diante)
+    ================================================================ */
+    var CONVIDADOS = [
+      { id:  'lara',      nome: 'Lara',      genero: 'f' },
+      { id:  'olivia',    nome: 'Olívia',    genero: 'f' },
+      { id:  'emanuelly', nome: 'Emanuelly', genero: 'f' },
+      { id:  'helena',    nome: 'Helena',    genero: 'f' },
+      { id:  'geovanna',  nome: 'Geovanna',  genero: 'f' },
+      { id:  'felipe',    nome: 'Felipe',    genero: 'm' },
+      { id:  'brian',     nome: 'Brian',     genero: 'm' },
+      { id:  'bernardo',  nome: 'Bernardo',  genero: 'm' },
+      { id:  'lorenzo',   nome: 'Lorenzo',   genero: 'm' },
+      { id:  'enzo',      nome: 'Enzo',      genero: 'm' },
+      /* ← adicione mais convidados aqui */
+    ];
+
+    /* ================================================================
+       PERSONALIZAÇÃO — lê ?c= da URL e preenche nome + gênero
+    ================================================================ */
+    (function personalizarConvite() {
+      var params    = new URLSearchParams(window.location.search);
+      //var idParam   = parseInt(params.get('c'), 10);
+      var idParam = (params.get('c') || '').toLowerCase();
+      var elOi      = document.getElementById('txt-oi');
+      var elChamada = document.getElementById('txt-chamada');
+
+      var convidado = null;
+      for (var i = 0; i < CONVIDADOS.length; i++) {
+        if (CONVIDADOS[i].id === idParam) { convidado = CONVIDADOS[i]; break; }
+      }
+
+      if (!convidado) {
+        /* Sem ?c= ou id não encontrado → mantém o texto padrão do HTML */
+        return;
+      }
+
+      elOi.textContent = 'Oi ' + convidado.nome + '!';
+
+      elChamada.innerHTML = convidado.genero === 'f'
+        ? 'Você está convidada para a minha<br>festa de aniversário!'
+        : 'Você está convidado para a minha<br>festa de aniversário!';
+    })();
+
+    /* ================================================================
+       ÁUDIO — iOS FIX
+    ================================================================ */
     var btn    = document.getElementById('btn-som');
     var audio  = document.getElementById('audio');
     var icone  = document.getElementById('som-icone');
